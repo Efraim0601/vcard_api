@@ -1,0 +1,6 @@
+# Used when running in Docker (docker-compose sets POSTGRES_* and SERVER_PORT)
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}

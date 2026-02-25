@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: vcard
+      POSTGRES_USER: vcard
+      POSTGRES_PASSWORD: vcard
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"   # Host 5433 (5432 souvent pris par PostgreSQL local) → pgAdmin : port 5433
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vcard -d vcard"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: vcard
+      POSTGRES_USER: vcard
+      POSTGRES_PASSWORD: vcard
+      SERVER_PORT: 8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./vcard
+      dockerfile: Dockerfile
+    ports:
+      # 4201 pour éviter conflit avec ng serve (4200)
+      - "4201:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
