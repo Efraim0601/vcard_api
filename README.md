@@ -32,7 +32,7 @@ docker run -d --name postgres-vcard -e POSTGRES_DB=vcard -e POSTGRES_USER=vcard 
 ./mvnw spring-boot:run
 ```
 
-API disponible sur **http://localhost:8080**. Les variables d’environnement optionnelles : `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `SERVER_PORT`.
+API disponible sur **http://localhost:8888**. Les variables d’environnement optionnelles : `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `SERVER_PORT`.
 
 ### Frontend (Angular)
 
@@ -42,7 +42,7 @@ npm install
 npm start
 ```
 
-Ouvrir **http://localhost:4200**. En mode développement, le front appelle le backend sur `http://localhost:8080` (voir `vcard/src/app/core/environments/environment.development.ts`).
+Ouvrir **http://localhost:4200**. En mode développement, le front appelle le backend sur `http://localhost:8888` (voir `vcard/src/app/core/environments/environment.development.ts`).
 
 ## Docker (stack complète)
 
@@ -57,7 +57,7 @@ docker-compose up -d --build
 ```
 
 - **Frontend** : http://localhost:4201 (nginx sert l’app et proxy `/api` vers le backend)
-- **Backend** : http://localhost:8080
+- **Backend** : http://localhost:8888
 - **PostgreSQL** : port 5432 (interne au réseau Docker)
 
 Arrêt :

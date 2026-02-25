@@ -35,7 +35,7 @@ vcard/
 │       ├── core/
 │       │   └── environments/
 │       │       ├── environment.ts              # Prod : apiBaseUrl = ''
-│       │       └── environment.development.ts  # Dev : apiBaseUrl = 'http://localhost:8080'
+│       │       └── environment.development.ts  # Dev : apiBaseUrl = 'http://localhost:8888'
 │       │
 │       ├── models/
 │       │   └── business-card.ts      # Interfaces BusinessCard, SavedContact
@@ -337,7 +337,7 @@ sequenceDiagram
 | Fichier | Rôle |
 |---------|------|
 | **Frontend** | |
-| `vcard/src/app/core/environments/environment*.ts` | URL de base de l’API (prod = '', dev = 'http://localhost:8080'). |
+| `vcard/src/app/core/environments/environment*.ts` | URL de base de l’API (prod = '', dev = 'http://localhost:8888'). |
 | `vcard/angular.json` | Build, fileReplacements pour l’environnement de dev. |
 | `vcard/nginx.conf` | En Docker : servir l’app et proxy `/api/` vers le backend. |
 | **Backend** | |
