@@ -31,8 +31,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    ports:
-      - "8888:8888"
+    # Backend non exposé sur l'hôte : seul le frontend (nginx) y accède en HTTP → plus d'erreur "Invalid character in method name".
+    # Pour exposer l'API (ex. debug), ajouter : ports: ["8888:8888"]
 
   frontend:
     restart: unless-stopped

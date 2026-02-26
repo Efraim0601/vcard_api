@@ -38,8 +38,8 @@ sudo docker-compose up -d --build
 
 Le build peut prendre plusieurs minutes (Maven + npm). Une fois terminé :
 
-- **Frontend** : port **4201**
-- **Backend** : port **8888** (HTTP uniquement ; ne pas ouvrir en `https://` dans le navigateur, sinon erreur « Invalid character in method name »)
+- **Frontend** : port **4201** (accès à l’application ; les appels API passent par nginx vers le backend)
+- **Backend** : non exposé sur l’hôte (écoute en 8888 uniquement dans le réseau Docker). Cela évite les erreurs « Invalid character in method name » lorsque du HTTPS ou des sondes touchent le port.
 - **PostgreSQL** : port **5433** (optionnel, pour accès direct à la base)
 
 ### 1.3 Ouvrir les ports dans le pare-feu (si UFW est actif)
@@ -48,7 +48,7 @@ Pour accéder à l’app depuis une autre machine :
 
 ```bash
 sudo ufw allow 4201/tcp   # application web
-sudo ufw allow 8888/tcp   # optionnel, si vous voulez l’API directement
+# sudo ufw allow 8888/tcp   # optionnel, si vous voulez l’API directement
 sudo ufw reload
 sudo ufw status
 ```
